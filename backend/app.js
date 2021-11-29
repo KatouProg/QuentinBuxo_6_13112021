@@ -10,7 +10,7 @@ const userRoutes = require("./routes/user");
 
 mongoose
   .connect(
-    "mongodb+srv://katouprog:Janjakus30@piiquanteocp6.75o3e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", //process.env.SECRET_DB
+    "mongodb+srv://katouprog:Janjakus30@piiquanteocp6.75o3e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", // process.env.SECRET_DB
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
