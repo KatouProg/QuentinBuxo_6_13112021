@@ -1,15 +1,23 @@
 const User = require("../models/User");
+
+//Import de bcrypt pour hashage du mot de passe
 const bcrypt = require("bcrypt");
+
+//Import de crypto-js pour chiffrer l'adresse mail
+const cryptojs = require("crypto-js");
+
 const jwt = require("jsonwebtoken");
+
 require('dotenv').config();
 
 
 exports.signup = (req, res, next) => {
+  const emailCryptoJs = cryptojs.HmacSHA256(req.body.email, process.env.CRYPTOJS_EMAIL).toString(cryptojs.enc.Base64);
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
       const user = new User({
-        email: req.body.email,
+        email: emailCryptoJs,
         password: hash,
       });
       user
@@ -21,7 +29,8 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  User.findOne({ email: req.body.email })
+  const emailCryptoJs = cryptojs.HmacSHA256(req.body.email, process.env.CRYPTOJS_EMAIL).toString(cryptojs.enc.Base64);
+  User.findOne({ email: emailCryptoJs })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
@@ -34,7 +43,7 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
-            token: jwt.sign({ userId: user._id }, process.env.SECRET_TOKEN, {  //(process.env.SECRET_TOKEN)
+            token: jwt.sign({ userId: user._id }, process.env.SECRET_TOKEN, {
               expiresIn: "24h",
             }),
           });
