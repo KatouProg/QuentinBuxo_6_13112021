@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
     //     console.log(err);
     //     throw "Invalid user ID";
     //   }
-    // });
+    // }); ;
     const userId = decodedToken.userId;
     if (req.body.userId && req.body.userId !== userId) {
       throw "Invalid user ID";
