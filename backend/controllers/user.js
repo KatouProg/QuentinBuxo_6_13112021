@@ -22,6 +22,7 @@ exports.signup = (req, res, next) => {
     .toString(cryptojs.enc.Base64);
 
 //Hash du mot de passe avant de l'envoyer à la DB
+//Comprendre la logique de création de token --> 3 parties du token
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
@@ -58,6 +59,7 @@ exports.login = (req, res, next) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
       }
+      //console.log(user);
 
   //Controler la validité du password envoyé par le front    
       bcrypt

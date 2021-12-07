@@ -8,7 +8,8 @@ exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id;
   const sauce = new Sauce({
-    ...sauceObject,
+    ...sauceObject, // !!!!!!!!!!!!! (Spread operator) Rapatrie les données json sauceObject 
+    //On remplace les données déjà présentes dans le json par les nouvelles données
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
