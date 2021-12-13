@@ -1,10 +1,10 @@
 // Install d'express --> deploiement de l'API
 const express = require("express");
 
-const bodyParser = require("body-parser");
-const helmet = require("helmet");
-const mongoose = require("mongoose");
-const path = require("path");
+const bodyParser = require("body-parser"); // extrait le corp d' une requete et l' expose dans req.body
+const helmet = require("helmet"); // securise express en configurant divers headers
+const mongoose = require("mongoose"); // facilite les interactions avec MongoDB
+const path = require("path"); // nouvelle importation (images --> dossier statique) dans app.js pour acceder au path du serveur --> 
 require('dotenv').config();
 
 // Import des routes user et sauce

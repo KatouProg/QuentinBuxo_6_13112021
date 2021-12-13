@@ -83,7 +83,6 @@ exports.getAllSauces = (req, res, next) => {
 };
 
 // Like / Dislike une sauce
-
 exports.likeDislikeSauce = (req, res, next) => {
   let like = req.body.like;
   let userId = req.body.userId;
