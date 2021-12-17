@@ -38,7 +38,7 @@ exports.createSauce = (req, res, next) => {
   delete sauceObject._id;
   const sauce = new Sauce({
     ...sauceObject, // !!!!!!!!!!!!! (Spread operator) Rapatrie les données json sauceObject --> (req.body.sauce)
-    // On remplace les données déjà présentes dans le json par les nouvelles données --> M.A.J
+    // On remplace les données déjà présentes dans le .json par les nouvelles données --> M.A.J
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
